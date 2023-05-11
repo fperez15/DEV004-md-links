@@ -25,16 +25,16 @@ import path from "path";
 
 //--------------------------------------------------------------------------------------
 
-// existe la ruta
+// exist path
 export const existPath = (path) => fs.existsSync(path);
 
 // absolute path
 export const absolutePath = (userPath) => path.isAbsolute(userPath);
 
-// convertir a ruta absoluta
+// convert absolute route
 export const convertPath = (absolutepath) => path.resolve(absolutepath);
 
-// mi ruta es un directorio o no?
+// is directory?
 export const directoryPath = (path) => {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
@@ -43,6 +43,28 @@ export const directoryPath = (path) => {
     });
   });
 };
+
+// read folder
+export const readFiles = (path) =>
+  fs.readdir(path, (err, files) => {
+    if (err) {
+      return console.log(err);
+    }
+    files.forEach((file) => console.log('Archivos en carpeta: ',file));
+  });
+
+// is .md file? VALIDACION PARA USAR EN LA FUNCION mdLinks (si hay archivos .md?)
+export const mdFiles = (path) =>
+  fs.readdir(path, (err, files) => {
+    if (err) {
+      return console.log(err);
+    }
+    files.forEach((file) => {
+      if (file.endsWith(".md")) {
+        console.log("archivos .md: ", file);
+      }
+    });
+  });
 
 // if (stats.isDirectory()) {
 //     console.log(path, "es directorio");
