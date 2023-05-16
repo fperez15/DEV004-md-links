@@ -48,22 +48,32 @@ export const directoryPath = (path) => {
 export const readFiles = (path) =>
   fs.readdir(path, (err, files) => {
     if (err) {
-      return console.log(err);
+      return console.log('error al leer carpetas',err);
     }
-    files.forEach((file) => console.log('Archivos en carpeta: ',file));
+    files.forEach((file) => console.log("Archivos en carpeta: ", file));
   });
 
 // is .md file? VALIDACION PARA USAR EN LA FUNCION mdLinks (si hay archivos .md?)
-export const mdFiles = (path) =>
-  fs.readdir(path, (err, files) => {
+// export const mdFiles = (path) =>
+//   fs.readdir(path, (err, files) => {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     files.forEach((file) => {
+//       if (file.endsWith(".md")) {
+//         console.log("archivos .md: ", file);
+//       }
+//     });
+//   });
+
+// read .md file
+export const readFileMd = (path) =>
+  fs.readFile(path, 'utf8',(err, fileMd) => {
     if (err) {
-      return console.log(err);
-    }
-    files.forEach((file) => {
-      if (file.endsWith(".md")) {
-        console.log("archivos .md: ", file);
-      }
-    });
+          console.error('error en leer archivo.md', err);
+        } else {
+          console.log('Leer archivo.md', fileMd);
+        }
   });
 
 // if (stats.isDirectory()) {

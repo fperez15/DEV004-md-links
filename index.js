@@ -1,4 +1,4 @@
-import { existPath, absolutePath, convertPath, directoryPath, readFiles, mdFiles } from "./api.js";
+import { existPath, absolutePath, convertPath, directoryPath, readFiles, readFileMd } from "./api.js";
 
 // existe la ruta
 const [ , , path] = process.argv;
@@ -19,5 +19,8 @@ directoryPath(path)
 readFiles(path);
 
 // .md files
-mdFiles(path)
+// mdFiles(path)
+
+// read .md file
+readFileMd(path);
 
