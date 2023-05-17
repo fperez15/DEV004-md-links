@@ -37,7 +37,7 @@ console.log(existPath(path));
 // console.log(extFile('archivos con extension .md', path));
 
 //is a file?
-console.log(isFile(path));
+// console.log(isFile(path));
 
 // function recursiva
 const allReadDirectory = (principalRoute) => {
@@ -46,11 +46,18 @@ const allReadDirectory = (principalRoute) => {
     arrayReadDir.push(principalRoute);
 
   } else if (directoryPath(principalRoute)) {
-    let 
+    let hadReadDir = readFiles(principalRoute)
+    hadReadDir.forEach(complement => {
+      let hadMdFile = path.join(principalRoute, complement);
+      arrayReadDir = arrayReadDir.concat(allReadDirectory(hadMdFile));
+      
+    });
 
   }
+  return arrayReadDir;
   
 }
+allReadDirectory(path)
 
 // export const mdLinks = (router, options) => {
 //   return new Promise((resolve, reject) => {
