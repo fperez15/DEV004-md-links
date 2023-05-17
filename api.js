@@ -24,26 +24,23 @@ export const directoryPath = (path) => {
 };
 
 // read folder
-export const readFiles = (path) =>
-  fs.readdir(path, (err, files) => {
-    if (err) {
-      return console.log("error al leer carpetas", err);
-    }
-    console.log(files); 
-  });
+export const readFiles = (path) => {
+  return new Promise((resolve, reject) => {
+    fs.readdir(path, (err, files) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(files)
+      }
+    })
+  })
+}
 
-// is .md file? VALIDACION PARA USAR EN LA FUNCION mdLinks (si hay archivos .md?)
-// export const mdFiles = (path) =>
-//   fs.readdir(path, (err, files) => {
-//     if (err) {
-//       return console.log(err);
-//     }
-//     files.forEach((file) => {
-//       if (file.endsWith(".md")) {
-//         console.log("archivos .md: ", file);
-//       }
-//     });
-//   });
+// es un archivo?
+export const isFile = (route) => fs.statSync(route).isFile();
+
+// file extention .md
+export const extFile = (route) => path.extname(route);
 
 // read .md file
 export const readFileMd = (path) =>
@@ -54,4 +51,7 @@ export const readFileMd = (path) =>
       console.log("Leer archivo.md", fileMd);
     }
   });
+
+// recursion
+
 

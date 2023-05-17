@@ -1,7 +1,16 @@
-import { existPath, absolutePath, convertPath, directoryPath, readFiles, readFileMd } from "./api.js";
+import {
+  existPath,
+  absolutePath,
+  convertPath,
+  directoryPath,
+  readFiles,
+  readFileMd,
+  extFile,
+  isFile
+} from "./api.js";
 
 // existe la ruta
-const [ , , path] = process.argv;
+const [, , path] = process.argv;
 console.log(existPath(path));
 
 // la ruta es absoluta
@@ -24,53 +33,70 @@ console.log(existPath(path));
 // read .md file
 // readFileMd(path);
 
-export const mdLinks = (router, options) => {
-  return new Promise((resolve, reject) => {
-    const existRouter = existPath(router);
-  if (existRouter) {
-    const absoluteRouter = absolutePath(router);
-    
-    let routerConvert; 
-    if (absoluteRouter === false) {
-      //convertir a absoluta
-      routerConvert = convertPath(router);
-    } else {
-      routerConvert = router;
-    }
-    
-    //preguntar si es directorio
-    directoryPath(routerConvert)
-      .then((isDirectory) => {
-        console.log('es directorio', isDirectory);
-        if (isDirectory) {
-          
-          const readDirectory = readFiles(routerConvert);
-          console.log('leyendo directorio', readDirectory);
-          readDirectory.forEach((file) => {
-            
-            const unirRouter = `${readDirectory}\\${file}`
-            //console.log('rutas unidas', unirRouter);
-      
-            //unir rutas 
-            //luego recorro cada ruta le aplico si es directorio o si es archivo.md 
-      
-          })
-        } else {
-          console.log(`${router}`);
-        }
-      })
-      .catch((error) => console.log(error))
-  };
-  if (directoryPath) {
-    
-    
+// files extention .md
+// console.log(extFile('archivos con extension .md', path));
+
+//is a file?
+console.log(isFile(path));
+
+// function recursiva
+const allReadDirectory = (principalRoute) => {
+  let arrayReadDir = [];
+  if (isFile(principalRoute) &&  extFile === '.md') {
+    arrayReadDir.push(principalRoute);
+
+  } else if (directoryPath(principalRoute)) {
+    let 
+
   }
-  })
-
   
-};
+}
 
-mdLinks(path)
-.then((res) => res)
-.catch((err) => err)
+// export const mdLinks = (router, options) => {
+//   return new Promise((resolve, reject) => {
+//     const existRouter = existPath(router);
+//     if (existRouter) {
+//       const absoluteRouter = absolutePath(router);
 
+//       let routerConvert;
+//       if (absoluteRouter === false) {
+//         //convertir a absoluta
+//         routerConvert = convertPath(router);
+//       } else {
+//         routerConvert = router;
+//       }
+
+//       // preguntar si es directorio
+//       directoryPath(routerConvert)
+//         .then((isDirectory) => {
+      
+
+//           if (isDirectory) {
+//             const readDirectoryPromise = readFiles(routerConvert);
+//             readDirectoryPromise
+//               .then((readDirectory) => {
+//                 //unir rutas
+//                 readDirectory.forEach((file) => {
+//                   const unirRouter = `${routerConvert}\\${file}`;
+//                   //luego recorro cada ruta le aplico si es directorio o si es archivo.md
+
+//                 });
+                
+//               })
+//               .catch((error) => {
+//                 return error;
+//               });
+//           } else {
+//             console.log(`${router}`);
+//           }
+//         })
+//         .catch((error) => console.log(error));
+//     }
+//     if (directoryPath) {
+//     }
+//   });
+// };
+
+// mdLinks(path)
+//   .then((res) => res)
+//   .catch((err) => err);
