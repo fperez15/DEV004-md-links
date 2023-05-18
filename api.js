@@ -14,14 +14,7 @@ export const absolutePath = (userPath) => path.isAbsolute(userPath);
 export const convertPath = (absolutepath) => path.resolve(absolutepath);
 
 // is directory?
-export const directoryPath = (path) => {
-  return new Promise((resolve, reject) => {
-    fs.stat(path, (err, stats) => {
-      if (err) return reject(err);
-      resolve(stats.isDirectory());
-    });
-  });
-};
+export const directoryPath = (path) => fs.lstatSync(path).isDirectory();
 
 // read folder
 export const readFiles = (path) => {

@@ -6,58 +6,68 @@ import {
   readFiles,
   readFileMd,
   extFile,
-  isFile
+  isFile,
 } from "./api.js";
+import path from "path";
+import fs from "fs";
 
 // existe la ruta
-const [, , path] = process.argv;
-console.log(existPath(path));
+const [, , routerPrueba] = process.argv;
+console.log(existPath(routerPrueba));
 
 // la ruta es absoluta
-// console.log(absolutePath(path));
+// console.log(absolutePath(routerPrueba));
 
 //convertir a ruta absoluta
-// console.log(convertPath(path));
+// console.log(convertPath(routerPrueba));
 
 //saber si la ruta es un directorio
-// directoryPath(path)
+// directoryPath(routerPrueba)
 //   .then((esDir) => console.log(`${esDir}`))
 //   .catch((error) => console.error(`${error}`));
 
 // read files
-// readFiles(path);
+// readFiles(routerPrueba);
 
 // .md files
-// mdFiles(path)
+// mdFiles(routerPrueba)
 
 // read .md file
-// readFileMd(path);
+// readFileMd(routerPrueba);
 
 // files extention .md
-// console.log(extFile('archivos con extension .md', path));
+// console.log(extFile('archivos con extension .md', routerPrueba));
 
 //is a file?
-// console.log(isFile(path));
+// console.log(isFile(routerPrueba));
 
 // function recursiva
-const allReadDirectory = (principalRoute) => {
+const allReadDirectory = (principalRoute, allFiles) => {
   let arrayReadDir = [];
-  if (isFile(principalRoute) &&  extFile === '.md') {
+
+  if (extFile(principalRoute) === ".md") {
+    //console.log("holaaa", principalRoute);
     arrayReadDir.push(principalRoute);
-
+    
   } else if (directoryPath(principalRoute)) {
-    let hadReadDir = readFiles(principalRoute)
-    hadReadDir.forEach(complement => {
-      let hadMdFile = path.join(principalRoute, complement);
-      arrayReadDir = arrayReadDir.concat(allReadDirectory(hadMdFile));
-      
+    let hadReadDir = fs.readdirSync(principalRoute);
+    allFiles = allFiles || []
+    //console.log("leer directorio", hadReadDir);
+    hadReadDir.forEach((file) => {
+      if (fs.statSync(principalRoute + '/' + file).isDirectory()) {
+        allFiles = allReadDirectory(principalRoute + '/' + file, allFiles)
+      } else {
+        allFiles.push(new URL(file, import.meta.url).pathname)
+      }
+     
     });
-
-  }
-  return arrayReadDir;
+    
+  } 
   
-}
-allReadDirectory(path)
+  return allFiles;
+};
+allReadDirectory(routerPrueba);
+console.log(allReadDirectory(routerPrueba), "***");
 
 // export const mdLinks = (router, options) => {
 //   return new Promise((resolve, reject) => {
@@ -76,7 +86,6 @@ allReadDirectory(path)
 //       // preguntar si es directorio
 //       directoryPath(routerConvert)
 //         .then((isDirectory) => {
-      
 
 //           if (isDirectory) {
 //             const readDirectoryPromise = readFiles(routerConvert);
@@ -88,7 +97,7 @@ allReadDirectory(path)
 //                   //luego recorro cada ruta le aplico si es directorio o si es archivo.md
 
 //                 });
-                
+
 //               })
 //               .catch((error) => {
 //                 return error;
