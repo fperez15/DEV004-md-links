@@ -44,7 +44,18 @@ export const readFileMd = (path) =>
       console.log("Leer archivo.md", fileMd);
     }
   });
-
+// como array
+  // export const readArrayMd = (array) =>{
+  // array.forEach(element => {
+  //   fs.readFile(element, "utf8", (err, fileMd) => {
+  //     if (err) {
+  //       console.error("error en leer archivo.md", err);
+  //     } else {
+  //       console.log("Leer archivo.md", fileMd);
+  //     }
+  //   })
+  // });
+  // ;}
 // recursion
 
 

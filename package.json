@@ -11,9 +11,14 @@
     "version": "5.6.0",
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
   },
-  "bugs":{
-    "url" : "https://github.com/owner/project/issues",
-    "email" : "project@hostname.com"
+  "bugs": {
+    "url": "https://github.com/owner/project/issues",
+    "email": "project@hostname.com"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   }
-  
 }

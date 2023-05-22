@@ -8,9 +8,8 @@ import {
   extFile,
   isFile,
 } from "./api.js";
-import path from "path";
 import fs from "fs";
-
+import path from "path";
 // existe la ruta
 const [, , routerPrueba] = process.argv;
 console.log(existPath(routerPrueba));
@@ -48,71 +47,62 @@ const allReadDirectory = (principalRoute, allFiles) => {
   if (extFile(principalRoute) === ".md") {
     //console.log("holaaa", principalRoute);
     arrayReadDir.push(principalRoute);
-    
   } else if (directoryPath(principalRoute)) {
     let hadReadDir = fs.readdirSync(principalRoute);
-    allFiles = allFiles || []
-    //console.log("leer directorio", hadReadDir);
+    allFiles = allFiles || [];
     hadReadDir.forEach((file) => {
-      if (fs.statSync(principalRoute + '/' + file).isDirectory()) {
-        allFiles = allReadDirectory(principalRoute + '/' + file, allFiles)
+      if (fs.statSync(principalRoute + "/" + file).isDirectory()) {
+        allFiles = allReadDirectory(principalRoute + "/" + file, allFiles);
       } else {
-        allFiles.push(new URL(file, import.meta.url).pathname)
+        allFiles.push(new URL(file, import.meta.url).pathname);
       }
-     
     });
-    
-  } 
+  }
   
+ 
   return allFiles;
 };
-allReadDirectory(routerPrueba);
-console.log(allReadDirectory(routerPrueba), "***");
+allReadDirectory(routerPrueba)
 
-// export const mdLinks = (router, options) => {
-//   return new Promise((resolve, reject) => {
-//     const existRouter = existPath(router);
-//     if (existRouter) {
-//       const absoluteRouter = absolutePath(router);
+export const mdLinks = (router, options) => {
+  return new Promise((resolve, reject) => {
+    const existRouter = existPath(router);
+    if (existRouter) {
+      const absoluteRouter = absolutePath(router);
 
-//       let routerConvert;
-//       if (absoluteRouter === false) {
-//         //convertir a absoluta
-//         routerConvert = convertPath(router);
-//       } else {
-//         routerConvert = router;
-//       }
+      let routerConvert;
+      
+      if (absoluteRouter === false) {
+        //convertir a absoluta
+        routerConvert = convertPath(router);
+        
+        // pregunto si es un directorio
+      } else {
+        routerConvert = router;
+      }
+      //recursividad
+      const recursive = allReadDirectory((routerConvert));
+      // SIRVE PARA QUITAR '/' AL INICIO DE CADA RUTA
+      const recursiveModif = recursive.map((doc)=> doc.slice(1, doc.length))
+      console.log("ruta", routerConvert);
+      console.log(recursiveModif, 'recursividad');
+      // recorrer recuriveFuncion
+      console.log("primer elemento", recursiveModif[0]); 
+      
+      const x = fs.readFile(recursiveModif[0]);
 
-//       // preguntar si es directorio
-//       directoryPath(routerConvert)
-//         .then((isDirectory) => {
+      console.log("respueta", x);
 
-//           if (isDirectory) {
-//             const readDirectoryPromise = readFiles(routerConvert);
-//             readDirectoryPromise
-//               .then((readDirectory) => {
-//                 //unir rutas
-//                 readDirectory.forEach((file) => {
-//                   const unirRouter = `${routerConvert}\\${file}`;
-//                   //luego recorro cada ruta le aplico si es directorio o si es archivo.md
+      
+      // recursiveFuncion.forEach((docMd)=>{
+      //   readFileMd(docMd)
+      // })
+      //enviar array
+      //readArrayMd(recursiveFuncion)
+    }
+  });
+};
 
-//                 });
-
-//               })
-//               .catch((error) => {
-//                 return error;
-//               });
-//           } else {
-//             console.log(`${router}`);
-//           }
-//         })
-//         .catch((error) => console.log(error));
-//     }
-//     if (directoryPath) {
-//     }
-//   });
-// };
-
-// mdLinks(path)
-//   .then((res) => res)
-//   .catch((err) => err);
+mdLinks(routerPrueba)
+  .then((res) => res)
+  .catch((err) => err);
