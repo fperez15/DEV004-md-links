@@ -36,14 +36,18 @@ export const isFile = (route) => fs.statSync(route).isFile();
 export const extFile = (route) => path.extname(route);
 
 // read .md file
-export const readFileMd = (path) =>
-  fs.readFile(path, "utf8", (err, fileMd) => {
-    if (err) {
-      console.error("error en leer archivo.md", err);
-    } else {
-      console.log("Leer archivo.md", fileMd);
-    }
-  });
+export const readFileMd = (path) =>{
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, "utf8", (err, fileMd) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(fileMd);
+      }
+    });
+  })
+}
+ 
 // como array
   // export const readArrayMd = (array) =>{
   // array.forEach(element => {
@@ -58,4 +62,16 @@ export const readFileMd = (path) =>
   // ;}
 // recursion
 
-
+export const httpLinks = (array)=>{
+  const arrayHttp = array.map((obj)=>{
+  return fetch(obj.href).then((response)=>{
+    // console.log(response, '************');
+    obj.status = response.status;
+    obj.prueba = response.statusText
+    // console.log(obj, '-----5-------');
+    return obj;
+   })
+  })
+  // console.log(Promise.all(arrayHttp), '**********');
+  return Promise.all(arrayHttp) // promesa pendiente
+}

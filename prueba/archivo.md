@@ -1,4 +1,5 @@
-## 2. Resumen del proyecto
+[Process argv Method](https://www.tutorialspoint.com/process-argv-method-in-node-js)
 
-En este proyecto crearás una herramienta de línea de comando (CLI) así como tu
-propia librería (o biblioteca - library) en JavaScript.
+[Callbacks](https://www.freecodecamp.org/espanol/news/funciones-callback-en-javascript-que-son-los-callback-en-js-y-como-usarlos/)
+
+[Promesas](https://www.freecodecamp.org/espanol/news/que-es-una-promesa-promesas-de-javascript-para-principiantes/)
