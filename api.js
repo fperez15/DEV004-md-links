@@ -17,20 +17,20 @@ export const convertPath = (absolutepath) => path.resolve(absolutepath);
 export const directoryPath = (path) => fs.lstatSync(path).isDirectory();
 
 // read folder
-export const readFiles = (path) => {
-  return new Promise((resolve, reject) => {
-    fs.readdir(path, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files)
-      }
-    })
-  })
-}
+// export const readFiles = (path) => {
+//   return new Promise((resolve, reject) => {
+//     fs.readdir(path, (err, files) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve(files)
+//       }
+//     })
+//   })
+// }
 
 // es un archivo?
-export const isFile = (route) => fs.statSync(route).isFile();
+// export const isFile = (route) => fs.statSync(route).isFile();
 
 // file extention .md
 export const extFile = (route) => path.extname(route);

@@ -1,4 +1,4 @@
-import { existPath } from '../api.js';
+import { existPath, absolutePath, convertPath, directoryPath } from '../api.js';
 
 describe('existPath', () => {
   it('should return true if the path exist', () => {
@@ -9,4 +9,28 @@ describe('existPath', () => {
   });
 });
 
+describe('absolutePath', () => {
+  it('should return true if the path is absolute', () => {
+    expect(absolutePath('C:\\Users\\Francis\\OneDrive\\Escritorio\\Laboratoria\\DEV004-md-links')).toBe(true)
+  });
+  it('should return false if the path is not absolute', () => {
+    expect(absolutePath('test\\prueba.md')).toBe(false)
+  });
+});
+
+describe('convertToAbsolutePath', () => {
+  it('should return the path converted to absolute', () => {
+    expect(convertPath('test\\prueba.md')).toBe('C:\\Users\\Francis\\OneDrive\\Escritorio\\Laboratoria\\DEV004-md-links\\test\\prueba.md')
+  });
+});
+
+describe('isPathDirectory', () => {
+  it('should return true if the path is a directory', () => {
+    expect(directoryPath('prueba\\prueba2')).toBe(true)
+  });
+
+  it('should return false if the path is not a directory', () => {
+    expect(directoryPath('prueba\\archivo.md')).toBe(false)
+  });
+});
 

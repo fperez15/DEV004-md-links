@@ -115,6 +115,7 @@ export const mdLinks = (router, options) => {
             const fileContent = fileContents[i];
             // obtener las coincidencias utilizando matchAll()
             const matches = [...fileContent.matchAll(linkRegExp)];
+            
 
             //recorrer las coincidencias y extraer los enlaces
             for (const match of matches) {
@@ -130,12 +131,12 @@ export const mdLinks = (router, options) => {
             }
 
             // devolver los enlaces encontrados
-            console.log("links encontrados", links); 
+            console.log("links encontrados", links);
             // links => fn que recorrar el array (links) y por cada url
             // hacer la peticion http y añadir status y ok
-            httpLinks(links).then((respuesta)=>{
-              console.log('%c', respuesta, 'color:orange');
-            })
+            httpLinks(links).then((respuesta) => {
+              console.log("%c", respuesta, "color:orange");
+            });
             resolve(links);
           }
         })
