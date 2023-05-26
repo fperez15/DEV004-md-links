@@ -131,7 +131,7 @@ export const mdLinks = (router, options) => {
 
             // devolver los enlaces encontrados
             console.log("links encontrados", links); 
-            // links => fn quue recorrar el array (links) y por cada url
+            // links => fn que recorrar el array (links) y por cada url
             // hacer la peticion http y añadir status y ok
             httpLinks(links).then((respuesta)=>{
               console.log('%c', respuesta, 'color:orange');

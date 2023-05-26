@@ -16,10 +16,15 @@
     "email": "project@hostname.com"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
     "nodemon": "^2.0.22"
   },
   "scripts": {
-    "test": "jest"
+  
+  "start": "node ./index.js",
+  "eslint": "eslint --ext .js",
+  "test": "jest --coverage --transformIgnorePatterns []"
+  
   }
-
 }
