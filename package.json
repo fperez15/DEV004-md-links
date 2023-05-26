@@ -18,13 +18,12 @@
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",
+    "jest": "^29.5.0",
     "nodemon": "^2.0.22"
   },
   "scripts": {
-  
-  "start": "node ./index.js",
-  "eslint": "eslint --ext .js",
-  "test": "jest --coverage --transformIgnorePatterns []"
-  
+    "start": "node ./index.js",
+    "eslint": "eslint --ext .js",
+    "test": "jest --coverage --transformIgnorePatterns []"
   }
 }
