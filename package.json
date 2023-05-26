@@ -25,5 +25,8 @@
     "start": "node ./index.js",
     "eslint": "eslint --ext .js",
     "test": "jest --coverage --transformIgnorePatterns []"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1"
   }
 }

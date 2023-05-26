@@ -2,6 +2,7 @@ import fs from "fs"; // api callback --> fs.stat(ruta, callback)
 //fs.stat(ruta, callback) --> retrna una promeas
 //const fsp = fs.promise  -->fsp.stat(ruta) --> returna promesa
 import path from "path";
+import fetch from 'node-fetch';
 
 
 // exist path
@@ -62,16 +63,16 @@ export const readFileMd = (path) =>{
   // ;}
 // recursion
 
-export const httpLinks = (array)=>{
-  const arrayHttp = array.map((obj)=>{
-  return fetch(obj.href).then((response)=>{
-    // console.log(response, '************');
-    obj.status = response.status;
-    obj.prueba = response.statusText
-    // console.log(obj, '-----5-------');
-    return obj;
-   })
-  })
-  // console.log(Promise.all(arrayHttp), '**********');
-  return Promise.all(arrayHttp) // promesa pendiente
-}
+
+export const httpLinks = (array) => {
+  const arrayHttp = array.map((obj) => {
+    return fetch(obj.href)
+      .then((response) => {
+        obj.status = response.status;
+        obj.prueba = response.statusText;
+        return obj;
+      })
+  });
+
+  return Promise.all(arrayHttp)
+};
