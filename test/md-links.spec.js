@@ -1,4 +1,4 @@
-import { existPath, absolutePath, convertPath, directoryPath } from '../api.js';
+import { existPath, absolutePath, convertPath, directoryPath, extFile } from '../api.js';
 
 describe('existPath', () => {
   it('should return true if the path exist', () => {
