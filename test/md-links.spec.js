@@ -34,3 +34,12 @@ describe('isPathDirectory', () => {
   });
 });
 
+describe('extention File', () => {
+  it('should return the file extension correctly', () => {
+    expect(extFile('prueba\\archivo.md')).toBe('.md')
+  });
+  it('should return an empty string if there is no file extension', () => {
+    expect(extFile('prueba\\archivo')).toBe('');
+  })
+})
+
