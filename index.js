@@ -45,10 +45,11 @@ const allReadDirectory = (principalRoute, allFiles) => {
   return allFiles;
 };
 
-allReadDirectory(routerPrueba);
+// allReadDirectory(routerPrueba);
 
 export const mdLinks = (router, options) => {
   return new Promise((resolve, reject) => {
+  
     const existRouter = existPath(router);
     if (existRouter) {
       const absoluteRouter = absolutePath(router);
@@ -65,7 +66,7 @@ export const mdLinks = (router, options) => {
 
       //recursividad
       const recursive = allReadDirectory(routerConvert);
-
+      
       if (recursive.length === 0) {
         resolve("No hay archivos tipo .md");
       }

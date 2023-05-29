@@ -28,6 +28,7 @@
     "test": "jest --coverage --transformIgnorePatterns []"
   },
   "dependencies": {
+    "chalk": "^5.2.0",
     "node-fetch": "^3.3.1"
   }
 }
