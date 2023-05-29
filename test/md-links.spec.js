@@ -4,7 +4,8 @@ import {
   convertPath,
   directoryPath,
   extFile,
-  readFileMd
+  readFileMd,
+  httpLinks,
 } from "../api.js";
 
 describe("existPath", () => {
@@ -76,4 +77,29 @@ describe("readFileMd", () => {
   });
 });
 
+describe("httpLinks", () => {
+  it("debería devolver un array con los objetos actualizados", () => {
+    const array = [
+      { href: "https://www.tutorialspoint.com/process-argv-method-in-node-js" },
+      { href: "https://openwebinars.net/blog/que-es-nodejs/" },
+      { href: "https://es.wikipedia.org/wiki/Markdown" },
+    ];
 
+    // Mockear la función fetch para simular las respuestas de las peticiones HTTP
+    global.fetch = jest.fn().mockImplementation((url) => {
+      if (
+        url === "https://www.tutorialspoint.com/process-argv-method-in-node-js"
+      ) {
+        return Promise.resolve({ status: 200, statusText: "OK" });
+      } else if (url === "https://openwebinars.net/blog/que-es-nodejs/") {
+        return Promise.resolve({ status: 404, statusText: "Not Found" });
+      } else if (url === "https://es.wikipedia.org/wiki/Markdown") {
+        return Promise.resolve({
+          status: 500,
+          statusText: "Internal Server Error",
+        });
+      }
+    });
+   
+  });
+});
