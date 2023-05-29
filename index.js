@@ -153,9 +153,9 @@ export const mdLinks = (router, options) => {
   });
 };
 
-mdLinks(routerPrueba, { validate: true })
-  .then((res) => console.log(res))
-  .catch((err) => err);
+// mdLinks(routerPrueba, { validate: true })
+//   .then((res) => console.log(res))
+//   .catch((err) => err);
 
 // const array = [
 //   {
