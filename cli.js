@@ -12,9 +12,9 @@ const shouldShowStats = options.includes("--stats");
 if (pathToFile === undefined) {
   //si pathToFile no existe?
   console.log(
-    chalk.bgCyan.bold("Please, enter  a path or enter ") +
-      chalk.bgCyan.bold.italic("--help") +
-      chalk.bgCyan.bold(" to see the instructions...")
+    chalk.bgRed.bold("Please, enter  a path or enter ") +
+      chalk.bgRed.bold.italic("--help") +
+      chalk.bgRed.bold(" to see the instructions...")
   );
 } else {
   if (shouldValidate || shouldShowStats) {
@@ -44,7 +44,7 @@ if (pathToFile === undefined) {
       });
   } else {
     console.log(
-      chalk.bgCyanBright.bold("You can use the following options... \n")
+      chalk.bgRed.bold("You can use the following options... \n")
     );
 
     console.log(
@@ -53,21 +53,21 @@ if (pathToFile === undefined) {
         chalk.yellow.bold.italic("It will show the links")
     );
     console.log(
-      chalk.green.inverse("     --validate   ") +
+      chalk.green.inverse("     --validate    ") +
         " " +
         chalk.green.bold.italic(
           "It will show you the links with their status ok or fail"
         )
     );
     console.log(
-      chalk.blue.inverse("      --stats   ") +
+      chalk.blue.inverse("      --stats      ") +
         " " +
         chalk.blue.bold.italic(
           "It will show you the statistics of total and unique links"
         )
     );
     console.log(
-      chalk.magenta.inverse("--validate --stats") +
+      chalk.magenta.inverse("--validate --stats ") +
         " " +
         chalk.magenta.bold.italic(
           "It will show you the statistics of total, unique and broken links"
