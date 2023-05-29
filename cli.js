@@ -23,11 +23,11 @@ if (pathToFile === undefined) {
       .then((links) => {
         // Verificar las opciones y mostrar los resultados correspondientes
         if (shouldShowStats) {
-          console.log("Total:", links.length);
-          console.log("Unique:", new Set(links.map((link) => link.href)).size);
+          console.log(chalk.yellowBright.bold("Links Total:", links.length));
+          console.log(chalk.greenBright.bold("Links Unique:", new Set(links.map((link) => link.href)).size));
           if (shouldValidate) {
             const brokenLinks = links.filter((link) => link.status >= 400);
-            console.log("Broken:", brokenLinks.length);
+            console.log(chalk.redBright.bold("Links Broken:", brokenLinks.length));
           }
         } else {
           links.forEach((link) => {
@@ -35,7 +35,7 @@ if (pathToFile === undefined) {
               link.text.length > 50
                 ? link.text.slice(0, 50) + "..."
                 : link.text;
-            console.log(`${link.file} ${link.href} ${truncatedText}`);
+            console.log(` ${chalk.bgBlue.bold('File:')+chalk.blueBright.italic(link.file)}\n${chalk.bgGreen.bold('href:')+chalk.greenBright.italic(link.href)}\n${chalk.bgMagenta.bold('text:')+chalk.magentaBright.italic(truncatedText)}`);
           });
         }
       })
