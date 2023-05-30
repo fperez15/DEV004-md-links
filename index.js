@@ -10,11 +10,9 @@ import {
 import fs, { link } from "fs";
 import path from "path";
 
-// existe la ruta
 const [, , routerPrueba] = process.argv;
-// console.log(existPath(routerPrueba));
 
-// function recursiva
+// function recursive
 const allReadDirectory = (principalRoute, allFiles) => {
   let arrayReadDir = [];
 
@@ -25,15 +23,8 @@ const allReadDirectory = (principalRoute, allFiles) => {
     let hadReadDir = fs.readdirSync(principalRoute);
     allFiles = allFiles || [];
     hadReadDir.forEach((file) => {
-      const filePath = path.join(principalRoute, file); // Construir la ruta completa utilizando path.join()
+      const filePath = path.join(principalRoute, file); // Construct the full path using path.join()
 
-      // if (fs.statSync(principalRoute + "/" + file).isDirectory()) {
-      //   allFiles = allReadDirectory(principalRoute + "/" + file, allFiles);
-      //   console.log("test2", allFiles);
-      // } else {
-      //   allFiles.push(new URL(file, import.meta.url).pathname);
-      //   console.log("test3", allFiles);
-      // }
       if (fs.statSync(filePath).isDirectory()) {
         allFiles = allReadDirectory(filePath, allFiles);
       } else {
@@ -45,11 +36,8 @@ const allReadDirectory = (principalRoute, allFiles) => {
   return allFiles;
 };
 
-// allReadDirectory(routerPrueba);
-
 export const mdLinks = (router, options) => {
   return new Promise((resolve, reject) => {
-  
     const existRouter = existPath(router);
     if (existRouter) {
       const absoluteRouter = absolutePath(router);
@@ -57,47 +45,41 @@ export const mdLinks = (router, options) => {
       let routerConvert;
 
       if (absoluteRouter === false) {
-        //convertir a absoluta
+        //convert to absolute
         routerConvert = convertPath(router);
-        // pregunto si es un directorio
       } else {
         routerConvert = router;
       }
 
-      //recursividad
+      //recursion
       const recursive = allReadDirectory(routerConvert);
-      
+
       if (recursive.length === 0) {
         resolve("No hay archivos tipo .md");
       }
 
-      // SIRVE PARA QUITAR '/' AL INICIO DE CADA RUTA
-      //const recursiveModif = recursive.map((doc)=> doc.slice(1, doc.length))
-
-      //console.log("Elementos: ", recursive);
-
-      //recorro mi recursividad
+      //I loop my recursion
       const promisesRecursive = recursive.map((filePath) =>
         readFileMd(filePath)
-      ); // Creo un array de promesas
-      // resuelvo todas la promesas de promisesRecursive
+      ); // I create an array of promises
+      // resolve all promises from promisesRecursive
       Promise.all(promisesRecursive)
         .then((fileContents) => {
           const linkRegExp = /\[([^\]]+)\]\(([^\)]+)\)/g;
-          //array para almacenar los enlaces encontrados
+          //array to store the found links
           const links = [];
 
-          //recorrer mi array de archivos .md para saber la ruta de donde es mi link
+          //I go through my array of .md files to know the path of where my link is
           for (let i = 0; i < fileContents.length; i++) {
             const fileContent = fileContents[i];
-            // obtener las coincidencias utilizando matchAll()
+            //get the matches using matchAll()
             const matches = [...fileContent.matchAll(linkRegExp)];
 
-            //recorrer las coincidencias y extraer los enlaces
+            //loop through matches and extract links
             for (const match of matches) {
-              //recursive[i] la direccion de mi ruta md donde esta mi link
-              //match[1] es el texto
-              //match[2] es la url
+              //recursive[i] the address of my route md where is my link
+              //match[1] is the text
+              //match[2] is the url
               const link = {
                 href: match[2],
                 text: match[1],
@@ -113,12 +95,12 @@ export const mdLinks = (router, options) => {
           }
 
           if (options === undefined) {
-            // Si es que no pongo un parámetro de options me resuelvo esto
+            // If I don't put an options parameter, I resolve like this
             resolve(links);
           } else {
             if (typeof options !== "object") {
-              // Para asegurarnos que el parámetro options sea tipo objeto!!!
-              resolve("Ingrese una opción tipo objeto");
+              //To make sure that the options parameter is type object!!!
+              resolve("Enter an object type option");
             } else {
               if ("validate" in options) {
                 const valueOptions = options.validate;
@@ -126,7 +108,7 @@ export const mdLinks = (router, options) => {
                 if (valueOptions === true) {
                   // http request
                   httpLinks(links)
-                    // devolver el array de objetos con href, text, file, status y ok or fail
+                    //return the array of objects with href, text, file, status and ok or fail
                     .then((res) => resolve(res))
                     .catch((err) => err);
                   // validate --> FALSE
@@ -134,48 +116,24 @@ export const mdLinks = (router, options) => {
                   resolve(links);
                 } else {
                   resolve(
-                    "El valor para el atributo es booleano ingrese true o false"
+                    "The value for the attribute is boolean enter true or false"
                   );
                 }
               } else {
-                resolve(
-                  "Ingrese el atributo de 'validate' en el objeto de options"
-                );
+                resolve("Enter the 'validate' attribute in the options object");
               }
             }
           }
         })
         .catch((err) => {
-          reject(err); //manejar errores
+          reject(err); //handle errors
         });
     } else {
-      resolve("Ingrese una ruta válida");
+      resolve("Please enter a valid path");
     }
   });
 };
 
 // mdLinks(routerPrueba, { validate: true })
-//   .then((res) => console.log(res))
-//   .catch((err) => err);
-
-// const array = [
-//   {
-//     href: 'https://www.tutorialspoint.com/process-argv-method-in-node-js',
-//     text: 'Process argv Method',
-//     file: 'C:\\Users\\Fernando\\Documents\\francis\\DEV004-md-links\\prueba\\archivo.md'
-//   },
-//   {
-//     href: 'https://www.freecodecamp.org/espanol/news/funciones-callback-en-javascript-que-son-los-callback-en-js-y-como-usarlos/',
-//     text: 'Callbacks',
-//     file: 'C:\\Users\\Fernando\\Documents\\francis\\DEV004-md-links\\prueba\\archivo.md'
-//   },
-//   {
-//     href: 'https://www.freecodecamp.org/espanol/news/que-es-una-promesa-promesas-de-javascript-para-principiantes/',
-//     text: 'Promesas',
-//     file: 'C:\\Users\\Fernando\\Documents\\francis\\DEV004-md-links\\prueba\\archivo.md'
-//   }
-// ]
-
-// httpLinks(array)
 //   .then((res) => console.log(res))
 //   .catch((err) => err);

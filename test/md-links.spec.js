@@ -100,6 +100,22 @@ describe("httpLinks", () => {
         });
       }
     });
-   
+    expect(httpLinks(array)).resolves.toStrictEqual([
+      {
+        href: "https://www.tutorialspoint.com/process-argv-method-in-node-js",
+        status: 200,
+        prueba: "OK",
+      },
+      {
+        href: "https://openwebinars.net/blog/que-es-nodejs/",
+        status: 200,
+        prueba: "OK",
+      },
+      {
+        href: "https://es.wikipedia.org/wiki/Markdown",
+        status: 200,
+        prueba: "OK",
+      },
+    ]);
   });
 });

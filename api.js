@@ -1,6 +1,4 @@
-import fs from "fs"; // api callback --> fs.stat(ruta, callback)
-//fs.stat(ruta, callback) --> retrna una promeas
-//const fsp = fs.promise  -->fsp.stat(ruta) --> returna promesa
+import fs from "fs"; 
 import path from "path";
 import fetch from 'node-fetch';
 
@@ -17,22 +15,6 @@ export const convertPath = (absolutepath) => path.resolve(absolutepath);
 // is directory?
 export const directoryPath = (path) => fs.lstatSync(path).isDirectory();
 
-// read folder
-// export const readFiles = (path) => {
-//   return new Promise((resolve, reject) => {
-//     fs.readdir(path, (err, files) => {
-//       if (err) {
-//         reject(err);
-//       } else {
-//         resolve(files)
-//       }
-//     })
-//   })
-// }
-
-// es un archivo?
-// export const isFile = (route) => fs.statSync(route).isFile();
-
 // file extention .md
 export const extFile = (route) => path.extname(route);
 
@@ -48,22 +30,8 @@ export const readFileMd = (path) =>{
     });
   })
 }
- 
-// como array
-  // export const readArrayMd = (array) =>{
-  // array.forEach(element => {
-  //   fs.readFile(element, "utf8", (err, fileMd) => {
-  //     if (err) {
-  //       console.error("error en leer archivo.md", err);
-  //     } else {
-  //       console.log("Leer archivo.md", fileMd);
-  //     }
-  //   })
-  // });
-  // ;}
-// recursion
 
-
+//petition http
 export const httpLinks = (array) => {
   const arrayHttp = array.map((obj) => {
     return fetch(obj.href)
