@@ -59,7 +59,7 @@ Este archivo contiene 2 funciones:
   * hacer la peticion http y si validate es true
 
 <b>cli.js</b><br>
-
+En este modulo se ejecutan las lineas de comando --validate, --stats y --validate --stats. Se importa la funcion mdLinks de index.js y tambien se importa chalk de chalk que es para darle color a la consola. Tambien se utiliza el process.argv el cual recibe las lineas de comando mencionadas anteriormente 
 
 
 
