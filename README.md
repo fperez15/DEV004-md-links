@@ -39,7 +39,31 @@ Instalaciones de:
 Aplicacion del ddiagrama de flujo CLI en mi archivo cli.js, donde realice los calculos de los totales de links unicos, totales de links y totales de links rotos junto con sus validaciones respectivas.
 
 ### 3. Diagrama de Flujos
+Para la realizacion de este proyecto se procedio a realizar dos diagramas de flujos que se presentan a continuacion:
 
+![Diagrama de flujo API](diagrama%20de%20flujo%20API.png)
+![Diagrama de flujo CLI](diagrama%20de%20flujo%20CLI.jpeg)
+
+#### 4. Modulos del Proyecto
+
+<b>api.js</b><br>
+En este archivo se encuentran las funciones realizadas mediante los metodos de fyle system (fs) los cuales fueron aplicados para cada una de las funciones realizadas y que las mismas han sido llamadas en el archivo index.js en la funcion mdLinks, en este archivo se importan fs, path de node.js ademas tambien importamos fetch de fetch lo cual me permite hacer peticiones basado en promesas y lo cual me valida cada uno de los links.<br>
+
+<b>index.js</b><br>
+Este archivo contiene 2 funciones:
+- funcion recursiva (allReadDirectory): la cual tiene como funcionalidad leer los directorios y subdirtectorios de la ruta seleccionada. El mismo permite validar si un archivo es .md que me lo guarde en un array vacio y si no es un archivo.md preguntar si es un directorio y alli es donde se llama la funcion recursiva que llamar a la funcion allReadDirectory dentro de la misma. Esta funcion me retornara un array con archivos .md.
+
+- funcion mdLink que retorna una promesa y la cual realiza las siguientes validaciones: 
+  * leer cada archivo .md
+  * buscar los links y extraerlos del archivo
+  * hacer la peticion http y si validate es true
+
+<b>cli.js</b><br>
+
+
+
+
+##### 5. 
 
 
 
