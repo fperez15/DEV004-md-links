@@ -3,14 +3,14 @@
 
 ## 2. Planeacion de Sprints
 
-<b>1er Sprint</b>
+<b>1er Sprint</b><br>
 Lectura y analisis del README de mdLink, asi como la investigacion para realizar los diagramas de flujo
 
-2do Sprint. 
+<b>2do Sprint</b><br>
 - Creacion del diagrama de flujo API
 - Creacion del diagrama de flujo CLI
 
-3er Sprint
+<b>3er Sprint</b><br>
 Investigacion del modulo fyle system y entenderlo lo cual me llevo a realizar las siguientes funciones en en archivo api.js
 - Existe la ruta?
 - Ruta absoluta
@@ -20,10 +20,32 @@ Investigacion del modulo fyle system y entenderlo lo cual me llevo a realizar la
 - Leer archivos .md
 - Peticion http
 
-4to Sprint
+<b>4to Sprint</b><br>
 Investigacion que son funciones recursiva y tratar de entenderlas para aplicar. Por consiguiente logre aplicar la funcion recursiva en mi archivo index.js llamada (allReadDirectory)
 
-5to Sprint 
+<b>5to Sprint</b><br>
+Aplicar mis funciones que cree en el archivo api.js en mi funcion mdLinks que se encuentra en el archivo index.js. Fui armando esta funcion de acuerdo a como lo plantie en mi diagrama de flujo API
+
+<b>6to Sprint</b><br>
+
+Instalaciones de:
+- Babel
+- Jest
+- Chalk
+- Inicio de realizar los test de las funciones de api.js
+
+<b>7to Sprint</b><br>
+
+Aplicacion del ddiagrama de flujo CLI en mi archivo cli.js, donde realice los calculos de los totales de links unicos, totales de links y totales de links rotos junto con sus validaciones respectivas.
+
+### 3. Diagrama de Flujos
+
+
+
+
+
+
+
 ## 3. Objetivos de aprendizaje
 
 Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en tu proyecto. Piensa en eso al decidir tu estrategia de trabajo.
