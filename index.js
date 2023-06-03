@@ -52,7 +52,7 @@ export const mdLinks = (router, options) => {
       }
 
       //recursion
-      const recursive = allReadDirectory(routerConvert);
+      let recursive = allReadDirectory(routerConvert);
 
       if (recursive.length === 0) {
         resolve("No hay archivos tipo .md");

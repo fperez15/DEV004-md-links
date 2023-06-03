@@ -63,8 +63,31 @@ En este modulo se ejecutan las lineas de comando --validate, --stats y --validat
 
 
 
-##### 5. 
+##### 5. Modo de uso:
+<b>Ejecución de comandos</b><br>
 
+- Comando pincipal
+
+    md-links
+
+-Para visualizar las opciones de comando se ejecuta:
+
+    md-links --help
+![md-Links --help](md-links%20--help.PNG)
+
+- Para visualizar los links que se encuentran dentro de los archivos.md ejecuta el siguiente comando:
+
+    md-links ruta del archivo --validate
+  
+Ejemplo: 
+
+    md-links .prueba\archivo.md --validate
+![--validate](ruta--validate.PNG)  
+
+
+- Para visualizar los links mas sus status (ok o fail) ejecuta el siguiente comando:
+
+    md-links ruta del archivo 
 
 
 

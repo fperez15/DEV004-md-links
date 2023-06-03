@@ -30,12 +30,32 @@ if (pathToFile === undefined) {
               new Set(links.map((link) => link.href)).size
             )
           );
-          if (shouldValidate) {
-            const brokenLinks = links.filter((link) => link.status >= 400);
+        }
+
+        if (shouldValidate) {
+          links.forEach((link) => {
+            const linkStatus = link.status >= 400 ? "fail" : "ok";
             console.log(
-              chalk.redBright.bold("Links Broken:", brokenLinks.length)
+              `\n${
+                chalk.bgBlue.bold("File:") + chalk.blueBright.italic(link.file)
+              }\n${
+                chalk.bgGreen.bold("href:") +
+                chalk.greenBright.italic(link.href)
+              }\n${
+                chalk.bgMagenta.bold("text:") +
+                chalk.magentaBright.italic(truncatedText)
+              }\n${
+                chalk.bgCyan.bold("status:") +
+                (linkStatus === "fail"
+                  ? chalk.redBright.bold("fail")
+                  : chalk.greenBright.bold("ok"))
+              }\n`
             );
-          }
+          });
+          const brokenLinks = links.filter((link) => link.status >= 400);
+          console.log(
+            chalk.redBright.bold("Links Broken:", brokenLinks.length)
+          );
         } else {
           //if both shouldShowStats or shouldValidate is false I show my object array with file, href and text
           links.forEach((link) => {
