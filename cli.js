@@ -4,8 +4,6 @@ import chalk from "chalk";
 // Get command line arguments using process.argv (array destruct)
 const [, , pathToFile, ...options] = process.argv;
 
-console.log("ruta", pathToFile);
-
 // Check the options passed on the command line
 const shouldValidate = options.includes("--validate");
 const shouldShowStats = options.includes("--stats");

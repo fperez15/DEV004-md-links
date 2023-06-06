@@ -2,6 +2,8 @@
   "name": "md-links",
   "type": "module",
   "version": "0.1.0",
+  "description": "search links in md files",
+  "keywords": ["mdlinks, md-links"],
   "engines": {
     "node": ">=16.x"
   },
@@ -11,9 +13,15 @@
     "version": "5.6.0",
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
   },
+  "author": {
+    "name": "Francis Perez"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fperez15/DEV004-md-links"
+  },
   "bugs": {
-    "url": "https://github.com/fperez15/DEV004-md-links",
-    "email": "project@hostname.com"
+    "url": "https://github.com/fperez15/DEV004-md-links/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
