@@ -13,11 +13,10 @@ import path from "path";
 const [, , routerPrueba] = process.argv;
 
 // function recursive
-const allReadDirectory = (principalRoute, allFiles) => {
+const allReadDirectory = (principalRoute, allFiles = []) => {
   let arrayReadDir = [];
 
   if (extFile(principalRoute) === ".md") {
-    //console.log("holaaa", principalRoute);
     arrayReadDir.push(principalRoute);
   } else if (directoryPath(principalRoute)) {
     let hadReadDir = fs.readdirSync(principalRoute);
@@ -54,8 +53,8 @@ export const mdLinks = (router, options) => {
       //recursion
       let recursive = allReadDirectory(routerConvert);
 
-      if (recursive.length === 0) {
-        resolve("No hay archivos tipo .md");
+      if (recursive?.length === 0) {
+        resolve("No Links Found");
       }
 
       //I loop my recursion
@@ -110,7 +109,7 @@ export const mdLinks = (router, options) => {
                   httpLinks(links)
                     //return the array of objects with href, text, file, status and ok or fail
                     .then((res) => resolve(res))
-                    .catch((err) => err);
+                    .catch((err) => reject(err));
                   // validate --> FALSE
                 } else if (valueOptions === false) {
                   resolve(links);
@@ -135,5 +134,5 @@ export const mdLinks = (router, options) => {
 };
 
 // mdLinks(routerPrueba, { validate: true })
-//   .then((res) => console.log(res))
-//   .catch((err) => err);
+// .then((res) => console.log(res))
+// .catch((err) => err);

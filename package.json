@@ -12,7 +12,7 @@
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
   },
   "bugs": {
-    "url": "https://github.com/owner/project/issues",
+    "url": "https://github.com/fperez15/DEV004-md-links",
     "email": "project@hostname.com"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "extends": "./node_modules/standar/eslintrc.json"
   },
   "bin": {
-    "md-links": "./cli.js"
+    "md-links": "node ./cli.js"
   },
   "scripts": {
     "start": "node ./index.js",
