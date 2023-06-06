@@ -38,7 +38,7 @@
     "extends": "./node_modules/standar/eslintrc.json"
   },
   "bin": {
-    "md-links": "node ./cli.js"
+    "md-links": "./cli.js"
   },
   "scripts": {
     "start": "node ./index.js",
